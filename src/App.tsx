@@ -1,0 +1,54 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import TeamPage from './pages/TeamPage';
+import ResearchPage from './pages/ResearchPage';
+import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
+import FuelsPage from './pages/FuelsPage';
+
+// Product Pages
+import SteamBoilersPage from './pages/products/SteamBoilersPage';
+import HotAirGeneratorsPage from './pages/products/HotAirGeneratorsPage';
+import ElectricHotWaterPage from './pages/products/ElectricHotWaterPage';
+import SteamGeneratorsPage from './pages/products/SteamGeneratorsPage';
+import ThermicFluidPage from './pages/products/ThermicFluidPage';
+import HotWaterGeneratorsPage from './pages/products/HotWaterGeneratorsPage';
+
+function App() {
+  return (
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/team" element={<TeamPage />} />
+            <Route path="/research" element={<ResearchPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+
+            {/* Product Routes */}
+            <Route path="/products/steam-boilers" element={<SteamBoilersPage />} />
+            <Route path="/products/hot-air-generators" element={<HotAirGeneratorsPage />} />
+            <Route path="/products/electric-hot-water" element={<ElectricHotWaterPage />} />
+            <Route path="/products/steam-generators" element={<SteamGeneratorsPage />} />
+            <Route path="/products/thermic-fluid" element={<ThermicFluidPage />} />
+            <Route path="/products/hot-water-generators" element={<HotWaterGeneratorsPage />} />
+
+            {/* Fuel Routes - temporarily directing all to main FuelsPage */}
+            <Route path="/fuels/*" element={<FuelsPage />} />
+
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
