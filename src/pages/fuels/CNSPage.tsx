@@ -1,135 +1,67 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import FAQ from 'react-faq-component';
-import { fuels } from '../../data/fuels';
-
+import { CheckCircle, Leaf, Zap, Shield } from 'lucide-react';
 const CNSPage: React.FC = () => {
-  const cns = fuels.find(fuel => fuel.id === 'cns')!;
-
-  const faqData = {
-    rows: cns.faqs.map(faq => ({
-      title: faq.question,
-      content: faq.answer
-    }))
-  };
-
-  return (
-    <>
-      <section className="bg-primary-800 text-white py-24">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{cns.name}</h1>
-            <p className="text-xl text-primary-100">
-              {cns.description}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src={cns.image}
-                alt={cns.name}
-                className="rounded-lg shadow-xl w-full h-auto"
-              />
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <section className="bg-gradient-to-br from-orange-800 to-orange-600 text-white py-24">
+          <div className="container-custom">
+            <div className="max-w-3xl">
+              <h1 className="text-5xl font-bold mb-6">CNS Biomass</h1>
+              <p className="text-xl text-orange-100">
+                Premium coconut shell biomass for superior energy generation.
+              </p>
             </div>
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Key Advantages</h2>
-              <div className="space-y-4">
-                {cns.advantages.map((advantage, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="flex-shrink-0 mt-1">
-                      <div className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-white">
-                        ✓
-                      </div>
+          </div>
+        </section>
+  
+        <section className="py-20">
+          <div className="container-custom">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <img 
+                  src="https://images.pexels.com/photos/4440173/pexels-photo-4440173.jpeg"
+                  alt="CNS Biomass"
+                  className="rounded-xl shadow-2xl w-full h-auto"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Superior Energy Performance</h2>
+                <p className="text-lg text-gray-600 mb-6">
+                  Coconut Shell (CNS) biomass offers exceptional energy density and clean burning 
+                  characteristics, making it ideal for industrial power generation applications.
+                </p>
+                
+                <div className="bg-white p-6 rounded-xl shadow-lg mb-6">
+                  <h3 className="text-xl font-bold mb-4">Performance Metrics</h3>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Calorific Value:</span>
+                      <span className="text-orange-600 font-bold">4800 kcal/kg</span>
                     </div>
-                    <div className="ml-4">
-                      <p className="text-gray-700">{advantage}</p>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Ash Content:</span>
+                      <span className="text-orange-600 font-bold"> 4%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Moisture:</span>
+                      <span className="text-orange-600 font-bold"> 12%</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium">Bulk Density:</span>
+                      <span className="text-orange-600 font-bold">550-650 kg/m³</span>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-gray-50">
-        <div className="container-custom">
-          <h2 className="section-title">Applications</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {cns.applications.map((application, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold mb-3">{application}</h3>
-                <p className="text-gray-600">
-                  Optimal solution for {application.toLowerCase()} requiring high-energy biomass fuel.
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-custom">
-          <h2 className="section-title">Technical Specifications</h2>
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold text-gray-800">Calorific Value</h3>
-                  <p className="text-gray-600">{cns.calorificValue} kcal/kg</p>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800">Type</h3>
-                  <p className="text-gray-600">{cns.type}</p>
+                
+                <div className="flex space-x-4">
+                  <button className="btn-primary">Request Sample</button>
+                  <button className="btn-outline">Get Quote</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="section bg-gray-50">
-        <div className="container-custom">
-          <h2 className="section-title">Frequently Asked Questions</h2>
-          <div className="max-w-3xl mx-auto">
-            <FAQ 
-              data={faqData}
-              styles={{
-                bgColor: 'white',
-                titleTextColor: '#1a1a1a',
-                rowTitleColor: '#1a1a1a',
-                rowContentColor: '#4a4a4a',
-                arrowColor: '#48944f',
-              }}
-              config={{
-                animate: true,
-                openOnload: 0,
-                expandIcon: '+',
-                collapseIcon: '-',
-              }}
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-custom text-center">
-          <h2 className="section-title">Ready to Order?</h2>
-          <p className="section-subtitle">
-            Contact us to discuss your CNS biomass requirements and get a customized quote.
-          </p>
-          <Link to="/contact" className="btn-primary mt-8">
-            Request a Quote
-          </Link>
-        </div>
-      </section>
-    </>
-  );
-};
-
+        </section>
+      </div>
+    );
+  };
 export default CNSPage;
