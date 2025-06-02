@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Hero from '../components/home/Hero';
 import ProductsGrid from '../components/home/ProductsGrid';
 import StatsBanner from '../components/home/StatsBanner';
@@ -16,7 +17,7 @@ const HomePage: React.FC = () => {
     {
       number: "$117B",
       label: "Market Value",
-      description: "Prjected biomass market value by 2030"
+      description: "Projected biomass market value by 2030"
     },
     {
       number: "3.5%",
@@ -30,59 +31,76 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      quote: "Nature Biomass Solutions has transformed our energy infrastructure, reducing our carbon footprint while saving us money.",
-      author: "Sarah Chen",
-      role: "Operations Director, GreenTech Industries",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-    },
-    {
-      quote: "Their innovative approach to biomass solutions has set new standards in sustainable energy production.",
-      author: "Michael Rodriguez",
-      role: "CEO, EcoSystems Global",
-      image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
-    },
-    {
-      quote: "The expertise and dedication of their team made our transition to biomass energy seamless and efficient.",
-      author: "Emma Thompson",
-      role: "Sustainability Manager, CleanEnergy Alliance",
-      image: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg"
+  const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
     }
-  ];
+  };
 
   return (
     <>
       <Hero
         title="Sustainable Biomass Solutions for a Cleaner Future"
         subtitle="Leading the way in renewable energy with innovative biomass technologies that reduce emissions and increase efficiency."
-        ctaText="About Us"
-        ctaLink="/about"
-        backgroundImage="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        ctaText="Explore Solutions"
+        ctaLink="/products"
+        backgroundImage="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg"
       />
       
-      <section className="section bg-primary-50">
+      <motion.section 
+        className="section bg-primary-50"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
         <div className="container-custom">
-          <h2 className="section-title">Our Impact</h2>
+          <motion.h2 
+            className="section-title"
+            variants={fadeInUp}
+          >
+            Our Impact
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div 
+              <motion.div 
                 key={index}
-                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                variants={fadeInUp}
               >
-                <div className="text-4xl font-bold text-primary-600 mb-2">{stat.number}</div>
+                <motion.div 
+                  className="text-4xl font-bold text-primary-600 mb-2"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  {stat.number}
+                </motion.div>
                 <div className="text-xl font-semibold text-gray-800 mb-2">{stat.label}</div>
                 <p className="text-gray-600">{stat.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="section">
+      <motion.section 
+        className="section"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+      >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 className="text-3xl font-bold mb-6">About Nature Biomass</h2>
               <p className="text-lg text-gray-600 mb-6">
                 Since 2010, we've been at the forefront of sustainable energy solutions, 
@@ -90,29 +108,75 @@ const HomePage: React.FC = () => {
                 Our innovative approach combines cutting-edge engineering with environmental 
                 responsibility.
               </p>
-              <Link to="/about" className="btn-primary">
-                Learn More About Us
-              </Link>
-            </div>
-            <div className="rounded-lg overflow-hidden shadow-xl">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link to="/about" className="btn-primary">
+                  Learn More About Us
+                </Link>
+              </motion.div>
+            </motion.div>
+            <motion.div 
+              className="rounded-lg overflow-hidden shadow-xl"
+              variants={fadeInUp}
+              whileHover={{ scale: 1.02 }}
+            >
               <img 
                 src="https://images.pexels.com/photos/4491881/pexels-photo-4491881.jpeg"
                 alt="About Nature Biomass"
                 className="w-full h-full object-cover"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
       
       <ProductsGrid />
       
-      <section className="section bg-gray-50">
+      <motion.section 
+        className="section bg-gray-50"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+      >
         <div className="container-custom">
-          <h2 className="section-title">What Our Clients Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+          <motion.h2 
+            className="section-title"
+            variants={fadeInUp}
+          >
+            What Our Clients Say
+          </motion.h2>
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+          >
+            {[
+              {
+                quote: "Nature Biomass Solutions has transformed our energy infrastructure, reducing our carbon footprint while saving us money.",
+                author: "Sarah Chen",
+                role: "Operations Director, GreenTech Industries",
+                image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
+              },
+              {
+                quote: "Their innovative approach to biomass solutions has set new standards in sustainable energy production.",
+                author: "Michael Rodriguez",
+                role: "CEO, EcoSystems Global",
+                image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
+              },
+              {
+                quote: "The expertise and dedication of their team made our transition to biomass energy seamless and efficient.",
+                author: "Emma Thompson",
+                role: "Sustainability Manager, CleanEnergy Alliance",
+                image: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg"
+              }
+            ].map((testimonial, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                variants={fadeInUp}
+                whileHover={{ y: -10 }}
+              >
                 <div className="flex items-center mb-6">
                   <img 
                     src={testimonial.image}
@@ -125,17 +189,25 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 italic">"{testimonial.quote}"</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
       
       <PartnersCarousel />
       
-      <section className="section bg-primary-50">
+      <motion.section 
+        className="section bg-primary-50"
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+      >
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center"
+            variants={fadeInUp}
+          >
             <h2 className="section-title">Stay Updated</h2>
             <p className="text-lg text-gray-600 mb-8">
               Subscribe to our newsletter to get the latest updates on biomass solutions, industry news, and exclusive offers.
@@ -143,9 +215,9 @@ const HomePage: React.FC = () => {
             <div className="max-w-md mx-auto">
               <NewsletterForm />
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };
