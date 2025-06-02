@@ -12,7 +12,7 @@ import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Product Pages
-import ProductsOverviewPage from './pages/products';
+import ProductsOverviewPage from './pages/ProductsOverviewPage';
 import SteamBoilersPage from './pages/products/SteamBoilersPage';
 import HotAirGeneratorsPage from './pages/products/HotAirGeneratorsPage';
 import ElectricHotWaterPage from './pages/products/ElectricHotWaterPage';
@@ -21,7 +21,7 @@ import ThermicFluidPage from './pages/products/ThermicFluidPage';
 import HotWaterGeneratorsPage from './pages/products/HotWaterGeneratorsPage';
 
 // Fuel Pages
-import FuelsOverviewPage from './pages/fuels';
+import FuelsOverviewPage from './pages/FuelsOverviewPage';
 import BriquettesPage from './pages/fuels/BriquettesPage';
 import PelletsPage from './pages/fuels/PelletsPage';
 import WoodChipsPage from './pages/fuels/WoodChipsPage';
