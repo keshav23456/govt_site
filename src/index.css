@@ -78,7 +78,23 @@
   }
 
   .nav-link {
-    @apply relative text-gray-700 hover:text-primary-500 transition-colors duration-200 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all after:duration-300 hover:after:w-full;
+    @apply relative text-gray-700 transition-all duration-300;
+  }
+
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-primary-500;
+  }
+
+  .nav-link.active::after {
+    @apply w-full;
   }
 
   .form-input {
