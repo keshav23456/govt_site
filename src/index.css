@@ -200,7 +200,7 @@
 }
 
 .card-3d:hover {
-  @apply rotate-y-3 rotate-x-3;
+  transform: rotateY(3deg) rotateX(3deg);
 }
 
 /* Gradient text */
