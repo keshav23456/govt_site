@@ -1,60 +1,186 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import FAQ from 'react-faq-component';
 
 const ThermicFluidPage: React.FC = () => {
+  const faqData = {
+    rows: [
+      {
+        title: "What temperature range can be achieved?",
+        content: "Systems operate from 50°C to 350°C with precise control."
+      },
+      {
+        title: "What heating capacity is available?",
+        content: "Units range from 100 kW to 5000 kW heating capacity."
+      },
+      {
+        title: "What types of thermal fluid can be used?",
+        content: "Compatible with mineral and synthetic heat transfer fluids."
+      },
+      {
+        title: "How accurate is temperature control?",
+        content: "Temperature control accuracy of ±1°C is standard."
+      },
+      {
+        title: "What safety features are included?",
+        content: "Features include temperature limiting, flow monitoring, and pressure control."
+      },
+      {
+        title: "What is the system efficiency?",
+        content: "Thermal efficiency up to 90% with heat recovery options."
+      },
+      {
+        title: "What maintenance is required?",
+        content: "Annual fluid analysis and system inspection recommended."
+      },
+      {
+        title: "Can the system be automated?",
+        content: "Full automation with PLC controls and remote monitoring available."
+      },
+      {
+        title: "What is the expected lifespan?",
+        content: "20+ years with proper maintenance and fluid management."
+      },
+      {
+        title: "Are backup systems available?",
+        content: "Redundant systems and backup options can be incorporated."
+      }
+    ]
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-gray-900 mb-6">Thermic Fluid Heaters</h1>
-      <div className="prose max-w-none">
-        <p className="text-lg text-gray-700 mb-4">
-          Our thermic fluid heaters are designed to provide efficient and reliable heat transfer solutions for industrial processes. These systems use specialized heat transfer fluids to deliver precise temperature control and optimal thermal efficiency.
-        </p>
-        
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Key Features</h2>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>High thermal efficiency with minimal heat loss</li>
-            <li>Precise temperature control for sensitive processes</li>
-            <li>Low maintenance requirements and long service life</li>
-            <li>Compatible with various heat transfer fluids</li>
-            <li>Advanced safety features and monitoring systems</li>
-          </ul>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <div className="bg-gray-50 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">Applications</h3>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Chemical processing</li>
-              <li>Pharmaceutical manufacturing</li>
-              <li>Food processing</li>
-              <li>Textile industry</li>
-              <li>Plastic and rubber manufacturing</li>
-            </ul>
-          </div>
-          
-          <div className="bg-gray-50 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">Technical Specifications</h3>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Temperature range: 50°C to 350°C</li>
-              <li>Capacity: 100,000 to 2,000,000 kcal/hr</li>
-              <li>Pressure rating: Up to 10 bar</li>
-              <li>Fuel options: Natural gas, LPG, or biomass</li>
-              <li>Automated control systems</li>
-            </ul>
+    <>
+      <section className="bg-primary-800 text-white py-24">
+        <div className="container-custom">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Thermic Fluid Heaters</h1>
+            <p className="text-xl text-primary-100">
+              Advanced heat transfer solutions for precise temperature control in industrial processes.
+            </p>
           </div>
         </div>
+      </section>
 
-        <div className="bg-blue-50 rounded-lg p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Request Information</h2>
-          <p className="mb-4">
-            Contact our team for detailed specifications, pricing, and customization options for our thermic fluid heaters.
+      <section className="section">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <img 
+                src="https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg"
+                alt="Thermic Fluid Heater"
+                className="rounded-lg shadow-xl w-full h-auto"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Product Features</h2>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                      ✓
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-xl font-semibold mb-2">Optimal Heat Transfer</h3>
+                    <p className="text-gray-600">
+                      Advanced design ensures efficient and uniform heat distribution.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                      ✓
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-xl font-semibold mb-2">Precise Control</h3>
+                    <p className="text-gray-600">
+                      Temperature control accuracy of ±1°C for critical processes.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                      ✓
+                    </div>
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="text-xl font-semibold mb-2">Energy Efficient</h3>
+                    <p className="text-gray-600">
+                      Up to 90% thermal efficiency with heat recovery systems.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section bg-gray-50">
+        <div className="container-custom">
+          <h2 className="section-title">Applications</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold mb-3">Chemical Processing</h3>
+              <p className="text-gray-600">
+                Ideal for reaction vessels and distillation processes.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold mb-3">Pharmaceutical</h3>
+              <p className="text-gray-600">
+                Perfect for precise temperature control in drug manufacturing.
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold mb-3">Food Processing</h3>
+              <p className="text-gray-600">
+                Suitable for cooking, drying, and sterilization processes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-custom">
+          <h2 className="section-title">Frequently Asked Questions</h2>
+          <div className="max-w-3xl mx-auto">
+            <FAQ 
+              data={faqData}
+              styles={{
+                bgColor: 'white',
+                titleTextColor: '#1a1a1a',
+                rowTitleColor: '#1a1a1a',
+                rowContentColor: '#4a4a4a',
+                arrowColor: '#48944f',
+              }}
+              config={{
+                animate: true,
+                openOnload: 0,
+                expandIcon: '+',
+                collapseIcon: '-',
+              }}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-custom text-center">
+          <h2 className="section-title">Ready to Get Started?</h2>
+          <p className="section-subtitle">
+            Contact us to learn more about our thermic fluid heating solutions and get a customized quote for your needs.
           </p>
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-            Contact Sales
-          </button>
+          <Link to="/contact" className="btn-primary mt-8">
+            Request a Quote
+          </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
