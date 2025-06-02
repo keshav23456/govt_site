@@ -43,6 +43,9 @@ const Header: React.FC = () => {
     { name: 'Cashew Nuts Shell (CNS)', path: '/fuels/cashew-nut-shell' },
   ];
 
+  const isProductActive = productLinks.some(link => location.pathname === link.path);
+  const isFuelActive = fuelLinks.some(link => location.pathname === link.path);
+
   return (
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
@@ -68,7 +71,9 @@ const Header: React.FC = () => {
             {/* Products Dropdown */}
             <div className="relative group">
               <button
-                className="nav-link font-medium hover:text-primary-500 flex items-center"
+                className={`nav-link font-medium hover:text-primary-500 flex items-center ${
+                  isProductActive ? 'text-primary-500' : ''
+                }`}
                 onMouseEnter={() => setProductsDropdownOpen(true)}
                 onMouseLeave={() => setProductsDropdownOpen(false)}
               >
@@ -85,7 +90,9 @@ const Header: React.FC = () => {
                     <Link
                       key={link.path}
                       to={link.path}
-                      className="block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600"
+                      className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 ${
+                        location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
+                      }`}
                     >
                       {link.name}
                     </Link>
@@ -97,7 +104,9 @@ const Header: React.FC = () => {
             {/* Biomass Fuels Dropdown */}
             <div className="relative group">
               <button
-                className="nav-link font-medium hover:text-primary-500 flex items-center"
+                className={`nav-link font-medium hover:text-primary-500 flex items-center ${
+                  isFuelActive ? 'text-primary-500' : ''
+                }`}
                 onMouseEnter={() => setFuelsDropdownOpen(true)}
                 onMouseLeave={() => setFuelsDropdownOpen(false)}
               >
@@ -114,7 +123,9 @@ const Header: React.FC = () => {
                     <Link
                       key={link.path}
                       to={link.path}
-                      className="block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600"
+                      className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 ${
+                        location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
+                      }`}
                     >
                       {link.name}
                     </Link>
@@ -166,7 +177,9 @@ const Header: React.FC = () => {
             {/* Mobile Products Menu */}
             <div className="py-2">
               <button
-                className="flex items-center justify-between w-full font-medium hover:text-primary-500"
+                className={`flex items-center justify-between w-full font-medium hover:text-primary-500 ${
+                  isProductActive ? 'text-primary-500' : ''
+                }`}
                 onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
               >
                 Products & Services
@@ -178,7 +191,9 @@ const Header: React.FC = () => {
                     <Link
                       key={link.path}
                       to={link.path}
-                      className="block py-2 text-gray-800 hover:text-primary-500"
+                      className={`block py-2 text-gray-800 hover:text-primary-500 ${
+                        location.pathname === link.path ? 'text-primary-500' : ''
+                      }`}
                     >
                       {link.name}
                     </Link>
@@ -190,7 +205,9 @@ const Header: React.FC = () => {
             {/* Mobile Fuels Menu */}
             <div className="py-2">
               <button
-                className="flex items-center justify-between w-full font-medium hover:text-primary-500"
+                className={`flex items-center justify-between w-full font-medium hover:text-primary-500 ${
+                  isFuelActive ? 'text-primary-500' : ''
+                }`}
                 onClick={() => setFuelsDropdownOpen(!fuelsDropdownOpen)}
               >
                 Biomass Fuels
@@ -202,7 +219,9 @@ const Header: React.FC = () => {
                     <Link
                       key={link.path}
                       to={link.path}
-                      className="block py-2 text-gray-800 hover:text-primary-500"
+                      className={`block py-2 text-gray-800 hover:text-primary-500 ${
+                        location.pathname === link.path ? 'text-primary-500' : ''
+                      }`}
                     >
                       {link.name}
                     </Link>
