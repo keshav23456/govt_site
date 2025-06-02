@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from '../ui/Logo';
@@ -8,6 +8,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const [fuelsDropdownOpen, setFuelsDropdownOpen] = useState(false);
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -25,7 +26,28 @@ const Header: React.FC = () => {
     setFuelsDropdownOpen(false);
   }, [location]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const handleDropdownEnter = useCallback((setter: (value: boolean) => void) => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setter(true);
+  }, [dropdownTimeout]);
+
+  const handleDropdownLeave = useCallback((setter: (value: boolean) => void) => {
+    const timeout = setTimeout(() => {
+      setter(false);
+    }, 200); // 200ms delay before closing
+    setDropdownTimeout(timeout);
+  }, []);
+
+  const toggleDropdown = useCallback((current: boolean, setter: (value: boolean) => void) => {
+    if (dropdownTimeout) {
+      clearTimeout(dropdownTimeout);
+      setDropdownTimeout(null);
+    }
+    setter(!current);
+  }, [dropdownTimeout]);
 
   const productLinks = [
     { name: 'Steam Boilers', path: '/products/steam-boilers' },
@@ -69,69 +91,73 @@ const Header: React.FC = () => {
             </Link>
 
             {/* Products Dropdown */}
-            <div className="relative group">
+            <div className="relative">
               <button
                 className={`nav-link font-medium hover:text-primary-500 flex items-center ${
                   isProductActive ? 'text-primary-500' : ''
                 }`}
-                onMouseEnter={() => setProductsDropdownOpen(true)}
-                onMouseLeave={() => setProductsDropdownOpen(false)}
+                onMouseEnter={() => handleDropdownEnter(setProductsDropdownOpen)}
+                onMouseLeave={() => handleDropdownLeave(setProductsDropdownOpen)}
+                onClick={() => toggleDropdown(productsDropdownOpen, setProductsDropdownOpen)}
+                aria-expanded={productsDropdownOpen}
               >
                 Products & Services
-                <ChevronDown className="ml-1 h-4 w-4" />
+                <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${productsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {productsDropdownOpen && (
-                <div
-                  className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2"
-                  onMouseEnter={() => setProductsDropdownOpen(true)}
-                  onMouseLeave={() => setProductsDropdownOpen(false)}
-                >
-                  {productLinks.map((link) => (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 ${
-                        location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div
+                className={`absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 transition-all duration-300 transform origin-top ${
+                  productsDropdownOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                }`}
+                onMouseEnter={() => handleDropdownEnter(setProductsDropdownOpen)}
+                onMouseLeave={() => handleDropdownLeave(setProductsDropdownOpen)}
+              >
+                {productLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 ${
+                      location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Biomass Fuels Dropdown */}
-            <div className="relative group">
+            <div className="relative">
               <button
                 className={`nav-link font-medium hover:text-primary-500 flex items-center ${
                   isFuelActive ? 'text-primary-500' : ''
                 }`}
-                onMouseEnter={() => setFuelsDropdownOpen(true)}
-                onMouseLeave={() => setFuelsDropdownOpen(false)}
+                onMouseEnter={() => handleDropdownEnter(setFuelsDropdownOpen)}
+                onMouseLeave={() => handleDropdownLeave(setFuelsDropdownOpen)}
+                onClick={() => toggleDropdown(fuelsDropdownOpen, setFuelsDropdownOpen)}
+                aria-expanded={fuelsDropdownOpen}
               >
                 Biomass Fuels
-                <ChevronDown className="ml-1 h-4 w-4" />
+                <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-300 ${fuelsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {fuelsDropdownOpen && (
-                <div
-                  className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2"
-                  onMouseEnter={() => setFuelsDropdownOpen(true)}
-                  onMouseLeave={() => setFuelsDropdownOpen(false)}
-                >
-                  {fuelLinks.map((link) => (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 ${
-                        location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div
+                className={`absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 transition-all duration-300 transform origin-top ${
+                  fuelsDropdownOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                }`}
+                onMouseEnter={() => handleDropdownEnter(setFuelsDropdownOpen)}
+                onMouseLeave={() => handleDropdownLeave(setFuelsDropdownOpen)}
+              >
+                {fuelLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block px-4 py-2 text-gray-800 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 ${
+                      location.pathname === link.path ? 'bg-primary-50 text-primary-600' : ''
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <Link to="/team" className="nav-link font-medium hover:text-primary-500">
@@ -151,8 +177,9 @@ const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             className="lg:hidden flex items-center p-2"
-            onClick={toggleMenu}
+            onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -180,26 +207,25 @@ const Header: React.FC = () => {
                 className={`flex items-center justify-between w-full font-medium hover:text-primary-500 ${
                   isProductActive ? 'text-primary-500' : ''
                 }`}
-                onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
+                onClick={() => toggleDropdown(productsDropdownOpen, setProductsDropdownOpen)}
+                aria-expanded={productsDropdownOpen}
               >
                 Products & Services
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${productsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {productsDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2">
-                  {productLinks.map((link) => (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      className={`block py-2 text-gray-800 hover:text-primary-500 ${
-                        location.pathname === link.path ? 'text-primary-500' : ''
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div className={`pl-4 mt-2 space-y-2 transition-all duration-300 ${productsDropdownOpen ? 'block' : 'hidden'}`}>
+                {productLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block py-2 text-gray-800 hover:text-primary-500 ${
+                      location.pathname === link.path ? 'text-primary-500' : ''
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             {/* Mobile Fuels Menu */}
@@ -208,26 +234,25 @@ const Header: React.FC = () => {
                 className={`flex items-center justify-between w-full font-medium hover:text-primary-500 ${
                   isFuelActive ? 'text-primary-500' : ''
                 }`}
-                onClick={() => setFuelsDropdownOpen(!fuelsDropdownOpen)}
+                onClick={() => toggleDropdown(fuelsDropdownOpen, setFuelsDropdownOpen)}
+                aria-expanded={fuelsDropdownOpen}
               >
                 Biomass Fuels
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${fuelsDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-              {fuelsDropdownOpen && (
-                <div className="pl-4 mt-2 space-y-2">
-                  {fuelLinks.map((link) => (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      className={`block py-2 text-gray-800 hover:text-primary-500 ${
-                        location.pathname === link.path ? 'text-primary-500' : ''
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div className={`pl-4 mt-2 space-y-2 transition-all duration-300 ${fuelsDropdownOpen ? 'block' : 'hidden'}`}>
+                {fuelLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block py-2 text-gray-800 hover:text-primary-500 ${
+                      location.pathname === link.path ? 'text-primary-500' : ''
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <Link to="/team" className="py-2 font-medium hover:text-primary-500">
