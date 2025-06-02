@@ -164,3 +164,40 @@
 .loading {
   @apply animate-pulse bg-gray-200;
 }
+
+/* Parallax sections */
+.parallax-section {
+  @apply relative transform-gpu will-change-transform;
+}
+
+/* Fade in sections */
+.fade-in-section {
+  @apply opacity-0 transform translate-y-8 transition-all duration-1000;
+}
+
+.fade-in-section.is-visible {
+  @apply opacity-100 translate-y-0;
+}
+
+/* Hover effects */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-2;
+}
+
+.hover-glow {
+  @apply transition-shadow duration-300 hover:shadow-lg hover:shadow-primary-500/20;
+}
+
+/* 3D card effect */
+.card-3d {
+  @apply perspective-1000 transform-gpu transition-transform duration-300;
+}
+
+.card-3d:hover {
+  @apply rotate-y-3 rotate-x-3;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
+}
