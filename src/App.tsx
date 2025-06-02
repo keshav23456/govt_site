@@ -2,16 +2,17 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
+
+// Pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import TeamPage from './pages/TeamPage';
 import ResearchPage from './pages/ResearchPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
-import ProductsOverviewPage from './pages/ProductsOverviewPage';
-import FuelsOverviewPage from './pages/FuelsOverviewPage';
 
 // Product Pages
+import ProductsOverviewPage from './pages/products';
 import SteamBoilersPage from './pages/products/SteamBoilersPage';
 import HotAirGeneratorsPage from './pages/products/HotAirGeneratorsPage';
 import ElectricHotWaterPage from './pages/products/ElectricHotWaterPage';
@@ -20,6 +21,7 @@ import ThermicFluidPage from './pages/products/ThermicFluidPage';
 import HotWaterGeneratorsPage from './pages/products/HotWaterGeneratorsPage';
 
 // Fuel Pages
+import FuelsOverviewPage from './pages/fuels';
 import BriquettesPage from './pages/fuels/BriquettesPage';
 import PelletsPage from './pages/fuels/PelletsPage';
 import WoodChipsPage from './pages/fuels/WoodChipsPage';
