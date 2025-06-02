@@ -8,7 +8,8 @@ import TeamPage from './pages/TeamPage';
 import ResearchPage from './pages/ResearchPage';
 import ContactPage from './pages/ContactPage';
 import NotFoundPage from './pages/NotFoundPage';
-import FuelsPage from './pages/FuelsPage';
+import ProductsOverviewPage from './pages/ProductsOverviewPage';
+import FuelsOverviewPage from './pages/FuelsOverviewPage';
 
 // Product Pages
 import SteamBoilersPage from './pages/products/SteamBoilersPage';
@@ -21,7 +22,7 @@ import HotWaterGeneratorsPage from './pages/products/HotWaterGeneratorsPage';
 // Fuel Pages
 import BriquettesPage from './pages/fuels/BriquettesPage';
 import PelletsPage from './pages/fuels/PelletsPage';
-import WoodChipsPage from './pages/fuels/WoodChipsPage.tsx';
+import WoodChipsPage from './pages/fuels/WoodChipsPage';
 import CNSPage from './pages/fuels/CNSPage';
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
             <Route path="/research" element={<ResearchPage />} />
             <Route path="/contact" element={<ContactPage />} />
 
-            {/* Product Routes */}
+            {/* Products Routes */}
+            <Route path="/products" element={<ProductsOverviewPage />} />
             <Route path="/products/steam-boilers" element={<SteamBoilersPage />} />
             <Route path="/products/hot-air-generators" element={<HotAirGeneratorsPage />} />
             <Route path="/products/electric-hot-water" element={<ElectricHotWaterPage />} />
@@ -46,7 +48,7 @@ function App() {
             <Route path="/products/hot-water-generators" element={<HotWaterGeneratorsPage />} />
 
             {/* Fuel Routes */}
-            <Route path="/fuels" element={<FuelsPage />} />
+            <Route path="/fuels" element={<FuelsOverviewPage />} />
             <Route path="/fuels/briquettes" element={<BriquettesPage />} />
             <Route path="/fuels/pellets" element={<PelletsPage />} />
             <Route path="/fuels/wood-chips" element={<WoodChipsPage />} />
