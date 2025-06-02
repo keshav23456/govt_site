@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import Particles from 'react-particles';
 import { loadSlim } from 'tsparticles-slim';
 import { Tilt } from 'react-tilt';
+import { Leaf } from 'lucide-react';
 
 interface HeroProps {
   title: string;
@@ -106,7 +107,10 @@ const Hero: React.FC<HeroProps> = ({
                 to={ctaLink} 
                 className="btn-accent text-center relative overflow-hidden group"
               >
-                <span className="relative z-10">{ctaText}</span>
+                <span className="relative z-10 flex items-center gap-2">
+                  <Leaf className="w-5 h-5" />
+                  {ctaText}
+                </span>
                 <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 opacity-10"></div>
               </Link>
             </Tilt>
