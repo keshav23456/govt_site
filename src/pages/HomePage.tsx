@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/home/Hero';
 import ProductsGrid from '../components/home/ProductsGrid';
 import StatsBanner from '../components/home/StatsBanner';
 import PartnersCarousel from '../components/home/PartnersCarousel';
 import NewsletterForm from '../components/forms/NewsletterForm';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const HomePage: React.FC = () => {
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
   const stats = [
     {
       number: "46%",
@@ -31,16 +38,54 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 }
+  useEffect(() => {
+    // Parallax effect for sections
+    gsap.utils.toArray('.parallax-section').forEach((section: any) => {
+      gsap.to(section, {
+        y: 50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    // Fade in animations for sections
+    gsap.utils.toArray('.fade-in-section').forEach((section: any) => {
+      gsap.from(section, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    });
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
   };
 
-  const staggerContainer = {
-    animate: {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.1
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
@@ -56,25 +101,30 @@ const HomePage: React.FC = () => {
       />
       
       <motion.section 
-        className="section bg-primary-50"
-        initial="initial"
-        whileInView="animate"
+        className="section bg-primary-50 parallax-section"
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
-        variants={staggerContainer}
+        variants={containerVariants}
       >
         <div className="container-custom">
           <motion.h2 
             className="section-title"
-            variants={fadeInUp}
+            variants={itemVariants}
           >
             Our Impact
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
+          >
             {stats.map((stat, index) => (
               <motion.div 
                 key={index}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                variants={fadeInUp}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <motion.div 
                   className="text-4xl font-bold text-primary-600 mb-2"
@@ -88,19 +138,22 @@ const HomePage: React.FC = () => {
                 <p className="text-gray-600">{stat.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
       <motion.section 
-        className="section"
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
+        className="section fade-in-section"
+        style={{ scale }}
       >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div variants={fadeInUp}>
+            <motion.div
+              initial={{ x: -100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
               <h2 className="text-3xl font-bold mb-6">About Nature Biomass</h2>
               <p className="text-lg text-gray-600 mb-6">
                 Since 2010, we've been at the forefront of sustainable energy solutions, 
@@ -119,7 +172,10 @@ const HomePage: React.FC = () => {
             </motion.div>
             <motion.div 
               className="rounded-lg overflow-hidden shadow-xl"
-              variants={fadeInUp}
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
             >
               <img 
@@ -135,21 +191,22 @@ const HomePage: React.FC = () => {
       <ProductsGrid />
       
       <motion.section 
-        className="section bg-gray-50"
-        initial="initial"
-        whileInView="animate"
+        className="section bg-gray-50 fade-in-section"
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
+        variants={containerVariants}
       >
         <div className="container-custom">
           <motion.h2 
             className="section-title"
-            variants={fadeInUp}
+            variants={itemVariants}
           >
             What Our Clients Say
           </motion.h2>
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={staggerContainer}
+            variants={containerVariants}
           >
             {[
               {
@@ -174,7 +231,7 @@ const HomePage: React.FC = () => {
               <motion.div 
                 key={index}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                variants={fadeInUp}
+                variants={itemVariants}
                 whileHover={{ y: -10 }}
               >
                 <div className="flex items-center mb-6">
@@ -198,15 +255,16 @@ const HomePage: React.FC = () => {
       <PartnersCarousel />
       
       <motion.section 
-        className="section bg-primary-50"
-        initial="initial"
-        whileInView="animate"
+        className="section bg-primary-50 fade-in-section"
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
+        variants={containerVariants}
       >
         <div className="container-custom">
           <motion.div 
             className="max-w-3xl mx-auto text-center"
-            variants={fadeInUp}
+            variants={itemVariants}
           >
             <h2 className="section-title">Stay Updated</h2>
             <p className="text-lg text-gray-600 mb-8">
