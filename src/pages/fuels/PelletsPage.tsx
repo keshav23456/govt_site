@@ -116,18 +116,6 @@ const PelletsPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <section className="section">
-        <div className="container-custom text-center">
-          <h2 className="section-title">Ready to Order?</h2>
-          <p className="section-subtitle">
-            Contact us to discuss your wood pellet requirements and get a customized quote.
-          </p>
-          <Link to="/contact" className="btn-primary mt-8">
-            Request a Quote
-          </Link>
-        </div>
-      </section>
     </>
   );
 };
