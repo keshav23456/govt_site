@@ -119,60 +119,12 @@ const HomePage: React.FC = () => {
       <Hero
         title="Sustainable Biomass Solutions for a Cleaner Future"
         subtitle="Leading the way in renewable energy with innovative biomass technologies that reduce emissions and increase efficiency."
-        ctaText="Explore Solutions"
-        ctaLink="/products"
+        ctaText="About Us"
+        ctaLink="/about"
         backgroundImage="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg"
       />
       
       <StatsBanner stats={stats} />
-
-      <motion.section 
-        className="section bg-white parallax-section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold mb-6">About Nature Biomass</h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Since 2010, we've been at the forefront of sustainable energy solutions, 
-                helping businesses transition to cleaner, more efficient biomass technologies. 
-                Our innovative approach combines cutting-edge engineering with environmental 
-                responsibility.
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link to="/about" className="btn-primary">
-                  Learn More About Us
-                </Link>
-              </motion.div>
-            </motion.div>
-            <motion.div 
-              className="rounded-lg overflow-hidden shadow-xl"
-              initial={{ x: 100, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <img 
-                src="https://images.pexels.com/photos/4491881/pexels-photo-4491881.jpeg"
-                alt="About Nature Biomass"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
       
       <ProductsGrid />
       
