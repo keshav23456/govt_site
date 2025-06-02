@@ -68,28 +68,6 @@ const HomePage: React.FC = () => {
     });
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
     <>
       <Hero
@@ -100,51 +78,13 @@ const HomePage: React.FC = () => {
         backgroundImage="https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg"
       />
       
+      <StatsBanner stats={stats} />
+
       <motion.section 
-        className="section bg-primary-50 parallax-section"
+        className="section bg-white parallax-section"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={containerVariants}
-      >
-        <div className="container-custom">
-          <motion.h2 
-            className="section-title"
-            variants={itemVariants}
-          >
-            Our Impact
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
-          >
-            {stats.map((stat, index) => (
-              <motion.div 
-                key={index}
-                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div 
-                  className="text-4xl font-bold text-primary-600 mb-2"
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  {stat.number}
-                </motion.div>
-                <div className="text-xl font-semibold text-gray-800 mb-2">{stat.label}</div>
-                <p className="text-gray-600">{stat.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      <motion.section 
-        className="section fade-in-section"
-        style={{ scale }}
       >
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -195,19 +135,10 @@ const HomePage: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={containerVariants}
       >
         <div className="container-custom">
-          <motion.h2 
-            className="section-title"
-            variants={itemVariants}
-          >
-            What Our Clients Say
-          </motion.h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={containerVariants}
-          >
+          <h2 className="section-title">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
                 quote: "Nature Biomass Solutions has transformed our energy infrastructure, reducing our carbon footprint while saving us money.",
@@ -231,8 +162,10 @@ const HomePage: React.FC = () => {
               <motion.div 
                 key={index}
                 className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                variants={itemVariants}
                 whileHover={{ y: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
                 <div className="flex items-center mb-6">
                   <img 
@@ -248,7 +181,7 @@ const HomePage: React.FC = () => {
                 <p className="text-gray-700 italic">"{testimonial.quote}"</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </motion.section>
       
@@ -259,12 +192,13 @@ const HomePage: React.FC = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        variants={containerVariants}
       >
         <div className="container-custom">
           <motion.div 
             className="max-w-3xl mx-auto text-center"
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <h2 className="section-title">Stay Updated</h2>
             <p className="text-lg text-gray-600 mb-8">
