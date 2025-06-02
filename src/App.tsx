@@ -21,7 +21,7 @@ import HotWaterGeneratorsPage from './pages/products/HotWaterGeneratorsPage';
 // Fuel Pages
 import BriquettesPage from './pages/fuels/BriquettesPage';
 import PelletsPage from './pages/fuels/PelletsPage';
-import WoodChipsPage from './pages/fuels/WoodChipsPage';
+import WoodChipsPage from './pages/fuels/WoodChipsPage.tsx';
 import CNSPage from './pages/fuels/CNSPage';
 
 function App() {
