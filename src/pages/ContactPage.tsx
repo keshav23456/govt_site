@@ -24,7 +24,6 @@ const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     setError('');
     
-    // Simulate form submission
     setTimeout(() => {
       if (formData.name && formData.email && formData.message) {
         setIsSuccess(true);
@@ -120,7 +119,7 @@ const ContactPage: React.FC = () => {
                     </a>
                     <a href="#" className="text-gray-600 hover:text-primary-500 transition-colors">
                       <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.003 10.003 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.896 4.896 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.003 10.003 0 01-3.127 1.195 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
                       </svg>
                     </a>
                     <a href="#" className="text-gray-600 hover:text-primary-500 transition-colors">
@@ -270,15 +269,15 @@ const ContactPage: React.FC = () => {
             </p>
           </div>
           
-          <div className="rounded-lg overflow-hidden shadow-md h-96">
-            {/* Embed a map here */}
+          <div className="rounded-lg overflow-hidden shadow-md h-[600px]">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100940.14245968247!2d-122.43759999999999!3d37.75769999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1625687063576!5m2!1sen!2sus" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0627379799256!2d-122.41941658468204!3d37.77492977975791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10ed6d9b5050fa5!2s123+Renewable+Way%2C+San+Francisco%2C+CA+94103!5e0!3m2!1sen!2sus!4v1565285105258!5m2!1sen!2sus"
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
-              allowFullScreen 
+              allowFullScreen
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               title="Office Location"
             ></iframe>
           </div>
